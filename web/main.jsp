@@ -24,16 +24,18 @@
         background-color: orange;
       }
 
-      .menu {
+      header {
         background-color : white;
+        width: 100%;
+        height : 20%;
       }
     </style>
   </head>
   <body>
     <%=request.getContextPath()%>
     <div class="app">
-      <div class="app_sub menu">
-        <%@ include file="common/menu.jsp" %>
+      <div class="app_sub">
+        <%@ include file="common/header.jsp" %>
       </div>
       <div class="app_sub"></div>
     </div>

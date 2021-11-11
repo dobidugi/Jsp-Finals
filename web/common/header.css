@@ -1,0 +1,28 @@
+header {
+    dispaly : flex;
+    flex-direction: row;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100%;
+}
+
+.menu li {
+
+    margin : 1em;
+}
+
+menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu li img {
+    padding-bottom: 0.5em;
+    width: 3em;
+    height: 3em;
+}
