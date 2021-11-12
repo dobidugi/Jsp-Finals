@@ -27,7 +27,7 @@
       header {
         background-color : white;
         width: 100%;
-        height : 20%;
+        height: 5em;
       }
     </style>
   </head>
@@ -35,7 +35,7 @@
     <%=request.getContextPath()%>
     <div class="app">
       <div class="app_sub">
-        <%@ include file="common/header.jsp" %>
+        <%@ include file="common/header/header.jsp" %>
       </div>
       <div class="app_sub"></div>
     </div>
