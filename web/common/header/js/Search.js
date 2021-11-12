@@ -14,7 +14,6 @@ class Search extends HTMLElement {
                 this.searchEvent();
             }
         })
-
         btn.type="submit";
         img.src=this.getAttribute("imgSrc");
         img.addEventListener("click",this.searchEvent);

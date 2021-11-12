@@ -9,6 +9,7 @@
 <html>
   <head>
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
+    <script src="${pageContext.request.contextPath}/main/js/NoticeSlider.js"></script>
     <title>$Title$</title>
     <style>
       .app {
@@ -20,8 +21,6 @@
 
       .app_sub {
         width: 100%;
-        height: 100%;
-        background-color: orange;
       }
 
       header {
@@ -29,17 +28,24 @@
         width: 100%;
         height: 5em;
       }
+
+      notice-slider {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 20em;
+      }
     </style>
   </head>
   <body>
-    <%=request.getContextPath()%>
     <div class="app">
+      <%@ include file="common/header/header.jsp" %>
       <div class="app_sub">
-        <%@ include file="common/header/header.jsp" %>
+        <notice-slider />
       </div>
-      <div class="app_sub"></div>
-    </div>
+      <div class="app_sub">
 
-    adasdadasd
+      </div>
+    </div>
   </body>
 </html>

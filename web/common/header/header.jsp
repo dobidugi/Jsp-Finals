@@ -10,8 +10,8 @@
     <head>
         <link href="${pageContext.request.contextPath}/common/header/header.css" type="text/css" rel="stylesheet" >
         <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
-        <script src="${pageContext.request.contextPath}/js/MenuItem.js"></script>
-        <script src="${pageContext.request.contextPath}/js/Search.js"></script>
+        <script src="${pageContext.request.contextPath}/common/header/js/MenuItem.js"></script>
+        <script src="${pageContext.request.contextPath}/common/header/js/Search.js"></script>
     </head>
 </html>
 <header class="header">
