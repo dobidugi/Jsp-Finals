@@ -40,20 +40,22 @@ class NoticeSlider extends HTMLElement {
                 background-color : skyblue;
             }
         `
-        let index = 1;
+        let index = 0;
         this.list.forEach((obj) => {
             const li = document.createElement("li");
             li.className="notice_li";
             li.setAttribute("index", String(index++));
+
             li.addEventListener("click", () => {
-                clearInterval(this.timerValue);
+                this.stopAutoSlider();
                 const nowIndex = parseInt(li.getAttribute("index"));
-                this.removeVisibleAttribute(this.current); // 현재 visible 인것 삭제
+                this.removeVisibleAttribute();
                 this.addVisibleAttribute(nowIndex); // 현재 인덱스 visible 속성 true
                 this.current = nowIndex; // 현재 인덱스번호 클릭한 인덱스로 변경
-                img.src=this.list[nowIndex-1].img; // 이미지변경
-                this.timer(img);
+                img.src=this.list[nowIndex].img; // 이미지변경
+                this.startAutoSlider(img);
             })
+
             ul.append(li);
             this.liList.push(li);
         })
@@ -64,31 +66,44 @@ class NoticeSlider extends HTMLElement {
         this.append(style);
         this.append(img);
         this.append(ul);
-        this.timer(img);
+        this.startAutoSlider(img);
     }
 
-    timer(img) {
+
+
+    startAutoSlider(img) {
         this.timerValue = setInterval(() => {
             if(this.list.length != 0) {
-                if(this.current-1 >= 0) {
-                    this.removeVisibleAttribute(this.current-1);
-                } else {
+                this.removeVisibleAttribute();
+                if(this.isNowLastCurrent()) {
                     this.current = 0;
-                    this.removeVisibleAttribute(this.list.length-1);
                 }
+                console.log(this.current);
                 img.src = this.list[this.current].img;
                 this.addVisibleAttribute(this.current);
                 this.current++;
             }
-        },3000)
+        },1000)
+    }
+
+    stopAutoSlider() {
+        clearInterval(this.timerValue);
+    }
+
+    isNowLastCurrent() {
+        if(this.current == this.list.length) return true;
+        else return false;
     }
 
     addVisibleAttribute(index) {
         this.liList[index].setAttribute("visible","true");
     }
-    removeVisibleAttribute(index) {
-        this.liList[index].removeAttribute("visible");
+    removeVisibleAttribute() {
+        this.liList.forEach(li => {
+            li.removeAttribute("visible");
+        })
     }
+
 
     getNoticeList() {
         const tmp = [
