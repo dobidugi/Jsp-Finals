@@ -10,6 +10,7 @@
   <head>
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
     <script src="${pageContext.request.contextPath}/main/js/NoticeSlider.js"></script>
+    <script src="${pageContext.request.contextPath}/main/js/ProductList.js"></script>
     <title>$Title$</title>
     <style>
       .app {
@@ -35,6 +36,11 @@
         width: 100%;
         height: 20em;
       }
+
+      product-list {
+        width: 100%;
+
+      }
     </style>
   </head>
   <body>
@@ -44,7 +50,7 @@
         <notice-slider />
       </div>
       <div class="app_sub">
-
+        <product-list></product-list>
       </div>
     </div>
   </body>

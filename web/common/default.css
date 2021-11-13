@@ -42,3 +42,8 @@ table {
     border-spacing: 0;
 }
 
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f8f8f8;
+}
