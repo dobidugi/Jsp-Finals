@@ -26,20 +26,17 @@
         <li>
             <menu-item
                     imgSrc="/common/header/img/cart.png"
-                    label="장바구니"
-            />
+                    label="장바구니"></menu-item>
         </li>
         <li>
             <menu-item
                     imgSrc="/common/header/img/user.png"
-                    label="내정보"
-            />
+                    label="내정보"></menu-item>
         </li>
         <li>
             <menu-item
                     imgSrc="/common/header/img/home.png"
-                    label="홈"
-            />
+                    label="홈"></menu-item>
         </li>
     </ul>
 </header>
