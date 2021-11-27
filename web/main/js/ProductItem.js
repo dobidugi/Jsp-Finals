@@ -1,3 +1,5 @@
+import UpdateBasketCount from "../../common/header/js/UpdateBasketCount.js";
+
 export default class ProductItem {
     constructor(parent, product) {
         this.product = product;
@@ -66,8 +68,7 @@ export default class ProductItem {
                 :
                 [];
         let find = false;
-        list.forEach(obj => {
-            console.log(obj);
+        list.map(obj => {
             if(obj.id === productId.toString()) {
 
                 obj.count = (parseInt(obj.count) + 1).toString();
@@ -77,6 +78,7 @@ export default class ProductItem {
         if(!find)
             list.push({"id" : productId.toString(), count : "1"});
         window.localStorage.setItem("basketList", JSON.stringify(list));
+        UpdateBasketCount();
     }
 
 

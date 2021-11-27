@@ -12,6 +12,8 @@
         <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
         <script src="${pageContext.request.contextPath}/common/header/js/MenuItem.js"></script>
         <script src="${pageContext.request.contextPath}/common/header/js/Search.js"></script>
+        <script src="${pageContext.request.contextPath}/common/header/js/BasketCount.js" type="module"></script>
+
     </head>
 </html>
 <header class="header">
@@ -27,6 +29,11 @@
             <menu-item
                     imgSrc="/common/header/img/cart.png"
                     label="장바구니"></menu-item>
+            <basket-count>
+
+            </basket-count>
+
+
         </li>
         <li>
             <menu-item
