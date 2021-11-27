@@ -78,7 +78,6 @@ class NoticeSlider extends HTMLElement {
                 if(this.isNowLastCurrent()) {
                     this.current = 0;
                 }
-                console.log(this.current);
                 img.src = this.list[this.current].img;
                 this.addVisibleAttribute(this.current);
                 this.current++;

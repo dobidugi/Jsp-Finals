@@ -9,8 +9,9 @@
 <html>
   <head>
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
-    <script src="${pageContext.request.contextPath}/main/js/NoticeSlider.js"></script>
-    <script src="${pageContext.request.contextPath}/main/js/ProductList.js"></script>
+    <script src="${pageContext.request.contextPath}/main/js/NoticeSlider.js" type="module"></script>
+    <script src="${pageContext.request.contextPath}/main/js/ProductList.js" type="module"></script>
+<%--    <script src="${pageContext.request.contextPath}/main/js/ProductItem.js" type="javascript"></script>--%>
     <title>$Title$</title>
     <style>
       .app {

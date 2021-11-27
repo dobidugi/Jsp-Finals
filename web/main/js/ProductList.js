@@ -1,3 +1,5 @@
+import ProductItem from "./ProductItem.js";
+
 class ProductList extends HTMLElement {
     constructor() {
         super();
@@ -88,56 +90,23 @@ class ProductList extends HTMLElement {
        `;
 
         this.productList.forEach(product => {
-           const item = document.createElement("div");
-           const img = document.createElement("img");
-           const info = document.createElement("div");
-           const title = document.createElement("span");
-           const price = document.createElement("span");
-
-           img.src = product.img;
-           item.className="product-item";
-           item.append(img);
-
-           info.className="info";
-           price.className="price";
-
-           title.textContent = product.title;
-           price.textContent = product.price + "원";
-
-
-           info.append(title);
-           info.append(price);
-           item.append(info);
-           item.append(this.createBtns());
-           productDiv.append(item);
+             new ProductItem(productDiv, product);
         });
 
         this.append(style);
         this.append(productDiv);
     }
 
-    createBtns() {
-        const btns = document.createElement("div");
-        const buyBtn = document.createElement("button");
-        const addBasketBtn = document.createElement("button");
-        btns.className = "btnContainer";
-
-        buyBtn.textContent = "바로구매";
-        addBasketBtn.textContent = "장바구니";
-        btns.append(buyBtn);
-        btns.append(addBasketBtn);
-        return btns;
-    }
 
     getProductList() {
         const tmp = [
-            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000},
-            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000},
-            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000},
-            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000},
-            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000},
-            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000},
-            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000}
+            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000, id: 1},
+            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000, id: 2},
+            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000, id: 3},
+            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000, id: 4},
+            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000, id: 5},
+            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000, id: 6},
+            {img: "/main/tmp/sam1.png", title: "상품제목", price: 35000, id: 7}
         ];
         this.productList = tmp;
     }
