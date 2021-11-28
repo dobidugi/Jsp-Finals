@@ -31,6 +31,7 @@
         flex-direction: column;
         width: 100%;
         height: 20em;
+        margin-top: 1.5em;
       }
 
       product-list {
