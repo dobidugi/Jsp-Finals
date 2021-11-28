@@ -14,17 +14,17 @@ class ProductList extends HTMLElement {
         style.textContent = `
             .product-container {
                 display: flex;
-                flex-wrap : wrap;;
+                flex-wrap : wrap;
                 flex-direction: row;
                 justify-content : center;
                 align-items: center;
+                height: 0;
    
             }
             
-             .product-item {
+            .product-item {
                 display: flex;
                 flex-direction : column;
-     
                 width : 25%;
                 height: 33em;
                 margin: 2em;
@@ -89,8 +89,9 @@ class ProductList extends HTMLElement {
             }
        `;
 
+
         this.productList.forEach(product => {
-             new ProductItem(productDiv, product);
+            new ProductItem(productDiv, product);
         });
 
         this.append(style);

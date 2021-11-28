@@ -18,18 +18,13 @@
         display : flex;
         flex-direction : column;
         width: 100%;
-        height: 100%;
+        height: 100vh;
       }
 
       .app_sub {
         width: 100%;
       }
 
-      header {
-        background-color : white;
-        width: 100%;
-        height: 5em;
-      }
 
       notice-slider {
         display: flex;
@@ -40,7 +35,6 @@
 
       product-list {
         width: 100%;
-
       }
     </style>
   </head>
@@ -48,7 +42,7 @@
     <div class="app">
       <%@ include file="common/header/header.jsp" %>
       <div class="app_sub">
-        <notice-slider />
+        <notice-slider></notice-slider>
       </div>
       <div class="app_sub">
         <product-list></product-list>
