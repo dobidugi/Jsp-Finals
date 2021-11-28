@@ -46,3 +46,10 @@ body {
     height: 100vh;
     background-color: #f8f8f8;
 }
+
+
+input:focus, select:focus, option:focus, textarea:focus, button:focus{
+    /*크롬에서 클릭시 테두리생기는거 제거*/
+    outline: none;
+}
+
