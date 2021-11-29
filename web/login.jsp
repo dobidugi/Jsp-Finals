@@ -40,7 +40,7 @@
             margin-top: 3em;
         }
 
-        basic-form > .form-item > label > input, basic-form > .form-item > input  {
+        basic-form >  form > .form-item > label > input, basic-form >  form >  .form-item > input  {
             display: block;
             box-sizing: border-box;
             width: 30em;
@@ -49,24 +49,24 @@
             height: 3.5em;
         }
 
-        basic-form > .form-item > label > input[type="text"],
-        basic-form > .form-item > label > input[type="password"] {
+        basic-form >  form > .form-item > label > input[type="text"],
+        basic-form >  form > .form-item > label > input[type="password"] {
             padding: 1em;
             color: #a9a9a9;
 
         }
 
-        basic-form > .form-item > label > input[type="text"]:focus,
-        basic-form > .form-item > label > input[type="password"]:focus {
+        basic-form >  form > .form-item > label > input[type="text"]:focus,
+        basic-form >  form > .form-item > label > input[type="password"]:focus {
             color: orange;
             outline: orange 1px solid;
         }
-        basic-form > .form-item >  label  >  input {
+        basic-form >  form > .form-item >  label  >  input {
             border: 1px solid lightgray;
         }
 
 
-        basic-form > .form-item > input[type="submit"] {
+        basic-form >  form >  .form-item > input[type="submit"] {
             background-color: #ff5000;
             color : white;
         }
@@ -103,15 +103,17 @@
         <%@ include file="common/header/header.jsp" %>
         <div class="app_sub">
             <basic-form>
-                <div class="form-item">
-                    <label>
-                        <input type="text" name="id" id="id" placeholder="아이디"/>
-                    </label>
-                    <label>
-                        <input type="password" name="password"  id="password" placeholder="비밀번호"/>
-                    </label>
-                    <input type="submit" id="submit" value="로그인" />
-                </div>
+                <form method="POST" action="login">
+                    <div class="form-item">
+                        <label>
+                            <input type="text" name="id" id="id" placeholder="아이디"/>
+                        </label>
+                        <label>
+                            <input type="password" name="password"  id="password" placeholder="비밀번호"/>
+                        </label>
+                        <input type="submit" id="submit" value="로그인" />
+                    </div>
+                </form>
 
                 <div class="form-item">
                     <ul class="support">
