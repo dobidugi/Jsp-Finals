@@ -9,6 +9,7 @@
 <html>
 <head>
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
+    <link href="${pageContext.request.contextPath}/common/login_register.css" type="text/css" rel="stylesheet" >
     <script src="${pageContext.request.contextPath}/common/header/js/BasicForm.js"></script>
     <script src="${pageContext.request.contextPath}/login/js/Login.js" type="module"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -29,47 +30,6 @@
 
         }
 
-        basic-form {
-            width: 30em;
-            height: 30em;
-            overflow: hidden;
-            font-size: 1.3em;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            margin-top: 3em;
-        }
-
-        basic-form >  form > .form-item > label > input, basic-form >  form >  .form-item > input  {
-            display: block;
-            box-sizing: border-box;
-            width: 30em;
-            margin-bottom: 0.5em;
-            border: none;
-            height: 3.5em;
-        }
-
-        basic-form >  form > .form-item > label > input[type="text"],
-        basic-form >  form > .form-item > label > input[type="password"] {
-            padding: 1em;
-            color: #a9a9a9;
-
-        }
-
-        basic-form >  form > .form-item > label > input[type="text"]:focus,
-        basic-form >  form > .form-item > label > input[type="password"]:focus {
-            color: orange;
-            outline: orange 1px solid;
-        }
-        basic-form >  form > .form-item >  label  >  input {
-            border: 1px solid lightgray;
-        }
-
-
-        basic-form >  form >  .form-item > input[type="submit"] {
-            background-color: #ff5000;
-            color : white;
-        }
 
         basic-form > .form-item > .support  {
             display: flex;
