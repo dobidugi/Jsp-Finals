@@ -103,7 +103,7 @@
                     <ul class="support">
                         <li class="support-item">아이디 찾기</li>
                         <li class="support-item">비밀번호 찾기</li>
-                        <li class="support-item">회원 가입</li>
+                        <li class="support-item">회원가입</li>
                     </ul>
                 </div>
 

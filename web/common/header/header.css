@@ -2,13 +2,13 @@
     display : flex;
     flex-wrap: nowrap;
     flex-direction:  row;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     padding-bottom : 1.5em;
     margin-right: 0em;
     margin-top : 1em;
     border-bottom: 1px solid #1f1209;
-    box-shadow: 0 20px 20px -20px #333;
+    box-shadow: 0 5px 10px -5px #333;
 }
 
 .header_item {
@@ -16,20 +16,18 @@
 }
 
 search-box {
-    flex-grow: 4;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     align-items: center;
     height: 100%;
-    width: 100%;
+    width: 30em;
 }
 
 search-box > input {
     border: 3px solid orange;
     border-radius: 5px;
-    width: 70%;
-    height: 4em;
+    width: 100%;
+    height: 3em;
     padding: 1em;
 }
 
@@ -45,20 +43,18 @@ search-box > button {
 
 search-box > button > img{
 
-    width: 3em;
-    height: 3em;
+    width: 1.8em;
+    height: 1.8em;
     border-left: none;
-    margin-right: 3em;
-    transform:translateX(-100%);
+    transform:translateX(-120%);
 }
 
 .menu {
-    flex-grow: 1;
     display : flex;
     flex-direction: row-reverse;
     padding-top : 0.8em;
     height: 100%;
-    padding-right: 3em;
+    margin-right: 3em;
 }
 
 .menu li {

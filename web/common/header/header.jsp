@@ -17,34 +17,38 @@
     </head>
 </html>
 <header class="header">
-    <search-box
-            class="header_item"
-            placeholder="검색할 상품을 입력해주세요."
-            imgSrc="/common/header/img/search.png"
-    >
+    <div class="header_item" >
+        <search-box
+                class="header_item"
+                placeholder="검색할 상품을 입력해주세요."
+                imgSrc="/common/header/img/search.png"
+        >
+    </div>
+
 
     </search-box>
-    <ul class="header_item menu">
-        <li>
-            <menu-item
-                    imgSrc="/common/header/img/cart.png"
-                    label="장바구니"></menu-item>
-            <basket-count>
+    <div class="header_item" >
+        <ul class="header_item menu">
+            <li>
+                <menu-item
+                        imgSrc="/common/header/img/cart.png"
+                        label="장바구니"></menu-item>
+                <basket-count>
 
-            </basket-count>
+                </basket-count>
 
 
-        </li>
-        <li>
-            <menu-item
-                    imgSrc="/common/header/img/user.png"
-                    label="내정보"></menu-item>
-        </li>
-        <li>
-            <menu-item
-                    imgSrc="/common/header/img/home.png"
-                    label="홈"></menu-item>
-        </li>
-    </ul>
-    <hr>
+            </li>
+            <li>
+                <menu-item
+                        imgSrc="/common/header/img/user.png"
+                        label="내정보"></menu-item>
+            </li>
+            <li>
+                <menu-item
+                        imgSrc="/common/header/img/home.png"
+                        label="홈"></menu-item>
+            </li>
+        </ul>
+    </div>
 </header>
