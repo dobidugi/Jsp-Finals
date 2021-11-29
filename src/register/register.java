@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import Service.UserService;
 import common.User;
 import common.UserValidator;
 
@@ -21,8 +22,7 @@ public class register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher page = req.getRequestDispatcher("register.jsp");
-
-        System.out.println("start user info");
+        req.setCharacterEncoding("utf-8");
         User user = new User();
         user.setId(req.getParameter("id"));
         user.setName(req.getParameter("name"));
@@ -36,14 +36,15 @@ public class register extends HttpServlet {
             String pw1 = user.getPassword();
             String pw2 = user.getPassword2();
             if(
-                    passwordCheck(pw1, pw2) || !pw1.equals(pw2)
+                    !passwordCheck(pw1, pw2) && !pw1.equals(pw2)
             ) {
                 System.out.println("패스어드 불일치");
                 req.setAttribute("error","패스워드 불일치");
                 page.forward(req,resp);
                 return;
             }
-
+            UserService service = new UserService();
+            service.register(user);
             System.out.println("데이터 입력 완벽");
         } else {
             System.out.println("데이터 모두입력안됨");
