@@ -10,6 +10,7 @@
 <head>
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
     <script src="${pageContext.request.contextPath}/common/header/js/BasicForm.js"></script>
+    <script src="${pageContext.request.contextPath}/login/js/Login.js" type="module"></script>
     <title>Title</title>
     <style>
         .app {
@@ -47,6 +48,18 @@
             height: 3.5em;
         }
 
+        basic-form > .form-item > label > input[type="text"],
+        basic-form > .form-item > label > input[type="password"] {
+            padding: 1em;
+            color: #a9a9a9;
+
+        }
+
+        basic-form > .form-item > label > input[type="text"]:focus,
+        basic-form > .form-item > label > input[type="password"]:focus {
+            color: orange;
+            outline: orange 1px solid;
+        }
         basic-form > .form-item >  label  >  input {
             border: 1px solid lightgray;
         }
@@ -91,12 +104,12 @@
             <basic-form>
                 <div class="form-item">
                     <label>
-                        <input type="text" name="id"/>
+                        <input type="text" name="id" id="id" placeholder="아이디"/>
                     </label>
                     <label>
-                        <input type="password" name="password"/>
+                        <input type="password" name="password"  id="password" placeholder="비밀번호"/>
                     </label>
-                    <input type="submit" value="로그인" />
+                    <input type="submit" id="submit" value="로그인" />
                 </div>
 
                 <div class="form-item">

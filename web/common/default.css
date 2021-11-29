@@ -53,3 +53,7 @@ input:focus, select:focus, option:focus, textarea:focus, button:focus{
     outline: none;
 }
 
+input[type="button"], input[type="submit"] {
+    cursor: pointer;
+}
+

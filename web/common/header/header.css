@@ -62,6 +62,7 @@ search-box > button > img{
     justify-content: center;
     align-items: center;
     width: 5em;
+    cursor: pointer;
 }
 
 menu-item {
