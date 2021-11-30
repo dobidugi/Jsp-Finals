@@ -1,4 +1,4 @@
-package login;
+package register;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 import Service.UserService;
 import common.User;
 import common.UserValidator;
+import javafx.util.Pair;
+import strings.Error;
 
 @WebServlet("/register")
 public class register extends HttpServlet {
@@ -38,23 +41,27 @@ public class register extends HttpServlet {
             if(
                     !passwordCheck(pw1, pw2) && !pw1.equals(pw2)
             ) {
-                System.out.println("패스어드 불일치");
-                req.setAttribute("error","패스워드 불일치");
+                req.setAttribute("error",Error.Regsiter.PASSWORD_NOT_MATCH);
                 page.forward(req,resp);
                 return;
             }
+
             UserService service = new UserService();
-            service.register(user);
-            System.out.println("데이터 입력 완벽");
+            Pair<Boolean, String> res = service.register(user); // 회원가입 시작
+            if(res.getKey()) { // 성공
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
+                return;
+            } else {
+                req.setAttribute("error",res.getValue());
+                page.forward(req,resp);
+                return;
+            }
         } else {
-            System.out.println("데이터 모두입력안됨");
-            req.setAttribute("error","모두 입력해주세요");
+            req.setAttribute("error", Error.Regsiter.EMPTY_FORM);
             req.getRequestDispatcher("register.jsp").forward(req,resp);
             return;
-
         }
 
-        req.getRequestDispatcher("register.jsp").forward(req,resp);
     }
 
     private boolean passwordCheck(String p1, String p2) {

@@ -3,31 +3,33 @@ package Service;
 import common.Db;
 import common.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Map;
 
-import common.Db;
+import javafx.util.Pair;
+import strings.Error;
+
 public class UserService {
     User user = null;
     Connection conn = null;
-    PreparedStatement pstmt = null;
 
     public UserService() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(Db.URL,Db.ID,Db.PASSWORD);
-            System.out.println("dbgood");
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
 
     }
-    public void register(User user) {
+    public Pair<Boolean,String> register(User user) {
         this.user = user;
+
+        if(findUserId())
+        {
+            return new Pair<>(false, Error.Regsiter.DUPLICATE_ID);
+        }
+        PreparedStatement pstmt = null;
         String query = "INSERT INTO User (userid, name, password, phone, address) VALUES (?, ?, ?, ?, ?)";
         try {
             System.out.println(user.getName());
@@ -39,15 +41,18 @@ public class UserService {
             pstmt.setString(5, user.getAddress());
 
             pstmt.executeUpdate();
+            return new Pair<>(true, null);
         } catch (SQLException e) {
-            e.printStackTrace();
-        }finally{
-
-            if(pstmt != null) try{ pstmt.close();} catch(SQLException e){};
-
-            if(conn != null) try{ conn.close();} catch(SQLException e){};
-
+            return new Pair<>(false, Error.DB_ERROR);
         }
+
+//        }finally{
+//
+//            if(pstmt != null) try{ pstmt.close();} catch(SQLException e){};
+//
+//            if(conn != null) try{ conn.close();} catch(SQLException e){};
+//
+//        }
 
 //        if(isDuplicateId())
 //        {
@@ -55,8 +60,29 @@ public class UserService {
 //        }
     }
 
-    public boolean isDuplicateId(){
-
-        return true;
+    public boolean findUserId() {
+        String query = "SELECT COUNT(*) as count FROM User WHERE userid=?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, user.getId());
+            System.out.println(pstmt.toString());
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                return rs.getInt("count") != 0;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+//        }finally{
+//
+//            if(pstmt != null) try{ pstmt.close();} catch(SQLException e){};
+//
+//            if(conn != null) try{ conn.close();} catch(SQLException e){};
+//
+//        }
+            return false;
+        }
     }
 }
