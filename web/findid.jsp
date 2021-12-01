@@ -50,7 +50,7 @@
                     <label>
                         <input type="text" name="phone" id="phone" placeholder="연락처"/>
                     </label>
-                    <input type="submit" id="Submit" value="아이디 찾기" />
+                    <input type="submit" id="findSubmit" value="아이디 찾기" />
                     <% String error = (String)request.getAttribute("error");
                     %>
                     <%

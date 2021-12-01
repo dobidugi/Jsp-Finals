@@ -13,7 +13,7 @@
         <script src="${pageContext.request.contextPath}/common/header/js/MenuItem.js"></script>
         <script src="${pageContext.request.contextPath}/common/header/js/Search.js"></script>
         <script src="${pageContext.request.contextPath}/common/header/js/BasketCount.js" type="module"></script>
-        <script src="${pageContext.request.contextPath}/common/header/js/Routes.js" type="module" ></script>
+        <script src="${pageContext.request.contextPath}/common/header/js/Routes.js" type="text/javascript" ></script>
     </head>
 </html>
 <header class="header">
@@ -29,7 +29,7 @@
     </search-box>
     <div class="header_item" >
         <ul class="header_item menu">
-            <li id="basket.jsp">
+            <li id="basket">
                 <menu-item
                         imgSrc="/common/header/img/cart.png"
                         label="장바구니"></menu-item>

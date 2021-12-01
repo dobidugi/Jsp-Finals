@@ -53,7 +53,7 @@
                     <label>
                         <input type="text" name="phone" id="phone" placeholder="연락처"/>
                     </label>
-                    <input type="submit" id="Submit" value="비밀번호 찾기" />
+                    <input type="submit" id="findSubmit" value="비밀번호 찾기" />
                     <% String error = (String)request.getAttribute("error");
                     %>
                     <%

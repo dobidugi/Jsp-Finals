@@ -1,8 +1,8 @@
 window.onload = function() {
     const routes = [
-        {id: "home", page:"/index"},
-        {id: "myinfo", page:"/myinfo"},
-        {id: "basket", page:"/basket"},
+        {id: "findId", page:"/findid"},
+        {id: "findPw", page:"/findpw"},
+        {id: "register", page:"/register"},
     ]
     routes.map((route) => {
         document.getElementById(`${route.id}`).addEventListener("click", () => {

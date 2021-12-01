@@ -11,7 +11,7 @@
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
     <link href="${pageContext.request.contextPath}/common/inpt_button_type1.css" type="text/css" rel="stylesheet" >
     <script src="${pageContext.request.contextPath}/common/header/js/BasicForm.js"></script>
-    <script src="${pageContext.request.contextPath}/login/js/Login.js" type="module"></script>
+    <script src="${pageContext.request.contextPath}/login/js/Routes.js" type="text/javascript"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Title</title>
     <style>
@@ -86,14 +86,15 @@
 
                 <div class="form-item">
                     <ul class="support">
-                        <li class="support-item">아이디 찾기</li>
-                        <li class="support-item">비밀번호 찾기</li>
-                        <li class="support-item">회원가입</li>
+                        <li class="support-item" id="findId">아이디 찾기</li>
+                        <li class="support-item" id="findPw">비밀번호 찾기</li>
+                        <li class="support-item" id="register">회원가입</li>
                     </ul>
                 </div>
 
             </basic-form>
         </div>
     </div>
+
 </body>
 </html>
