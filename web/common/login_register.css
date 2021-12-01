@@ -40,3 +40,8 @@ basic-form >  form >  .form-item > input[type="submit"] {
     background-color: #ff5000;
     color : white;
 }
+
+.error {
+    color: red;
+    font-size: 0.5em;
+}

@@ -1,5 +1,12 @@
 package common;
 
+import Service.AuthService;
+import Service.RegisterService;
+import javafx.util.Pair;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+
 public class User {
     private String name;
     private String id;
@@ -8,6 +15,15 @@ public class User {
     private String phone;
     private String address;
 
+
+    public User(HttpServletRequest req) {
+        this.id = req.getParameter("id");
+        this.name = req.getParameter("name");
+        this.password = req.getParameter("password");
+        this.password2 = req.getParameter("password2");
+        this.phone = req.getParameter("phone");
+        this.address = req.getParameter("address");
+    }
     public String getPassword2() {
         return password2;
     }
@@ -20,39 +36,30 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPhone() {
         return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+
+    public Pair<Boolean, String> register() {
+        RegisterService service = new RegisterService();
+        return service.register(this); // 회원가입 시작
+    }
+
+    public HashMap<String, String> auth() {
+        AuthService authService = new AuthService();
+        return authService.login(this);
     }
 }

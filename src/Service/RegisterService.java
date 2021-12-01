@@ -4,29 +4,28 @@ import common.Db;
 import common.User;
 
 import java.sql.*;
-import java.util.Map;
 
 import javafx.util.Pair;
 import strings.Error;
 
-public class UserService {
+public class RegisterService {
     User user = null;
     Connection conn = null;
 
-    public UserService() {
+    public RegisterService() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(Db.URL,Db.ID,Db.PASSWORD);
+            conn = DriverManager.getConnection(Db.URL, Db.ID, Db.PASSWORD);
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
 
     }
-    public Pair<Boolean,String> register(User user) {
+
+    public Pair<Boolean, String> register(User user) {
         this.user = user;
 
-        if(findUserId())
-        {
+        if (findUserId()) {
             return new Pair<>(false, Error.Regsiter.DUPLICATE_ID);
         }
         PreparedStatement pstmt = null;
@@ -44,6 +43,8 @@ public class UserService {
             return new Pair<>(true, null);
         } catch (SQLException e) {
             return new Pair<>(false, Error.DB_ERROR);
+        } catch (Exception e) {
+            System.out.println(e.toString());
         }
 
 //        }finally{
@@ -58,6 +59,7 @@ public class UserService {
 //        {
 //
 //        }
+        return new Pair<>(false, Error.DB_ERROR);
     }
 
     public boolean findUserId() {

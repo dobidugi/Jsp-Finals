@@ -19,7 +19,7 @@
 
 %>
 <%if(check==null) { %>
-<% response.sendRedirect("login.jsp");%>
+<% response.sendRedirect("login");%>
 <% } %>
 </body>
 </html>

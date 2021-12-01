@@ -27,4 +27,16 @@ public class UserValidator {
     public boolean isValidRegisterUser() {
         return RegisterNullCheck() && RegisterEmptyCheck();
     }
+
+
+    public boolean LoginEmptyCheck() {
+        return this.user.getId().length() != 0 &&
+                this.user.getPassword().length() != 0;
+    }
+
+    public boolean LoginNullCheck() {
+        return this.user.getId() != null &&
+                this.user.getPassword() != null;
+    }
+    public boolean isValidLoginUser() { return LoginNullCheck() && LoginEmptyCheck(); }
 }

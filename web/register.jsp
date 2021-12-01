@@ -30,10 +30,7 @@
 
     }
 
-    .error {
-      color: red;
-      font-size: 0.5em;
-    }
+
 
 
   </style>

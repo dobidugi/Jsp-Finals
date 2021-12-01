@@ -1,4 +1,4 @@
-package register;
+package controller.register;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -7,9 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
-import Service.UserService;
 import common.User;
 import common.UserValidator;
 import javafx.util.Pair;
@@ -24,15 +22,10 @@ public class register extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher page = req.getRequestDispatcher("register.jsp");
+        RequestDispatcher failPage = req.getRequestDispatcher("register.jsp");
+        RequestDispatcher successPage = req.getRequestDispatcher("login.jsp");
         req.setCharacterEncoding("utf-8");
-        User user = new User();
-        user.setId(req.getParameter("id"));
-        user.setName(req.getParameter("name"));
-        user.setPassword(req.getParameter("password"));
-        user.setPassword2(req.getParameter("password2"));
-        user.setPhone(req.getParameter("phone"));
-        user.setAddress(req.getParameter("address"));
+        User user = new User(req);
         UserValidator uv =new UserValidator(user);
 
         if(uv.isValidRegisterUser()) { // 폼정보를 모두 입력하였슴.
@@ -42,23 +35,24 @@ public class register extends HttpServlet {
                     !passwordCheck(pw1, pw2) && !pw1.equals(pw2)
             ) {
                 req.setAttribute("error",Error.Regsiter.PASSWORD_NOT_MATCH);
-                page.forward(req,resp);
+                failPage.forward(req,resp);
                 return;
             }
 
-            UserService service = new UserService();
-            Pair<Boolean, String> res = service.register(user); // 회원가입 시작
+            Pair<Boolean, String> res = user.register();
+
             if(res.getKey()) { // 성공
-                req.getRequestDispatcher("login.jsp").forward(req, resp);
+                successPage.forward(req, resp);
                 return;
             } else {
                 req.setAttribute("error",res.getValue());
-                page.forward(req,resp);
+                failPage.forward(req,resp);
                 return;
             }
+
         } else {
             req.setAttribute("error", Error.Regsiter.EMPTY_FORM);
-            req.getRequestDispatcher("register.jsp").forward(req,resp);
+            failPage.forward(req,resp);
             return;
         }
 

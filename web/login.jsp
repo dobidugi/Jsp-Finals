@@ -72,6 +72,15 @@
                             <input type="password" name="password"  id="password" placeholder="비밀번호"/>
                         </label>
                         <input type="submit" id="submit" value="로그인" />
+                        <% String error = (String)request.getAttribute("error");
+
+                        %>
+                        <%
+                            if(error != null) {
+                        %>
+                        <span class="error"><%=error %></span>
+                        <%  }
+                        %>
                     </div>
                 </form>
 
