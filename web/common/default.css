@@ -57,3 +57,10 @@ input[type="button"], input[type="submit"] {
     cursor: pointer;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color : black;
+}

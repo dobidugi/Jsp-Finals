@@ -1,9 +1,10 @@
 package common;
 
 import Service.AuthService;
+import Service.FindUserService;
 import Service.RegisterService;
-import javafx.util.Pair;
 
+import javafx.util.Pair;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 
@@ -61,5 +62,20 @@ public class User {
     public HashMap<String, String> auth() {
         AuthService authService = new AuthService();
         return authService.login(this);
+    }
+
+    public String findId() {
+        FindUserService findUserService = new FindUserService();
+        return findUserService.findUserId(this);
+    }
+
+    public boolean findPw() {
+        FindUserService findUserService = new FindUserService();
+        return findUserService.findUserPassword(this);
+    }
+
+    public boolean resetPassword() {
+        FindUserService findUserService = new FindUserService();
+        return findUserService.resetPassword(this);
     }
 }

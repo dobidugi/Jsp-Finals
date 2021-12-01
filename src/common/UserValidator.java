@@ -38,5 +38,57 @@ public class UserValidator {
         return this.user.getId() != null &&
                 this.user.getPassword() != null;
     }
+
     public boolean isValidLoginUser() { return LoginNullCheck() && LoginEmptyCheck(); }
+
+
+    public boolean FindIdNullCheck() {
+        return this.user.getName() != null &&
+                this.user.getPhone() != null;
+    }
+
+    public boolean FindIdEmptyCheck() {
+        return this.user.getName().length() != 0 &&
+                this.user.getPhone().length() != 0;
+    }
+
+    public boolean isValidFindUserId() { return FindIdNullCheck() && FindIdEmptyCheck();}
+
+
+
+    public boolean FindPwNullCheck() {
+        return this.user.getName() != null &&
+                this.user.getPhone() != null &&
+                this.user.getId() != null;
+    }
+
+    public boolean FindPwEmptyCheck() {
+        return this.user.getName().length() != 0 &&
+                this.user.getPhone().length() != 0  &&
+                this.user.getId().length() != 0;
+    }
+
+    public boolean isValidFindUserPw() { return FindPwNullCheck() && FindPwEmptyCheck(); }
+
+
+
+    public boolean ResetPasswordNullCheck() {
+        return this.user.getName() != null &&
+                this.user.getId() != null &&
+                this.user.getPhone() != null &&
+                this.user.getPassword() != null &&
+                this.user.getPassword2() != null;
+    }
+
+
+    public boolean ResetPasswordEmptyCheck() {
+        return this.user.getName().length() != 0 &&
+                this.user.getId().length() != 0 &&
+                this.user.getPhone().length() != 0 &&
+                this.user.getPassword().length() != 0 &&
+                this.user.getPassword2().length() != 0;
+    }
+
+    public boolean isValidResetPassword() { return ResetPasswordNullCheck() && ResetPasswordEmptyCheck(); }
+
 }

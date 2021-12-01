@@ -15,4 +15,17 @@
         <url-pattern>*.jsp</url-pattern>
         <url-pattern>*.jspx</url-pattern>
     </servlet-mapping>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>jsp-finals</web-resource-name>
+            <description>웹으로 접속한 사용자가 JSP파일로 직접 접근할 수 없도록 한다.</description>
+            <url-pattern>*.jsp</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name></role-name>
+        </auth-constraint>
+    </security-constraint>
 </web-app>
