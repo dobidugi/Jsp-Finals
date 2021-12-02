@@ -23,6 +23,7 @@
                 placeholder="검색할 상품을 입력해주세요."
                 imgSrc="/common/header/img/search.png"
         >
+        </search-box>
     </div>
 
 
@@ -38,6 +39,13 @@
 
 
             </li>
+            <% if(session.getAttribute("is_login") == "true") {%>
+            <li id="logout">
+                <menu-item
+                        imgSrc="/common/header/img/lout.png"
+                        label="로그아웃"></menu-item>
+            </li>
+            <% } %>
             <li id="myinfo">
                 <menu-item
                         imgSrc="/common/header/img/user.png"

@@ -28,7 +28,6 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher failPage = req.getRequestDispatcher("login.jsp");
-        RequestDispatcher successPage = req.getRequestDispatcher("/");
         User user = new User(req);
         UserValidator uv = new UserValidator(user);
 
@@ -44,8 +43,7 @@ public class login extends HttpServlet {
             session.setAttribute("is_login","true");
             session.setAttribute("id", res.get("id"));
             session.setAttribute("userid", res.get("userid"));
-
-            successPage.forward(req, resp);
+            resp.sendRedirect("index");
 
         } catch(Exception e) {
             System.out.println(e.getMessage());
