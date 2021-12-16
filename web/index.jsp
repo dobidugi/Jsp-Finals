@@ -46,7 +46,7 @@
         <notice-slider></notice-slider>
       </div>
       <div class="app_sub">
-        <product-list></product-list>
+        <%@ include file="common/product/product.jsp" %>
       </div>
     </div>
   </body>
