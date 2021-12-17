@@ -54,21 +54,21 @@
             </div>
         </product-item>
         <product-item>
-            <img src="/main/tmp/sam1.png" />
+            <img src="/main/tmp/sam1.png"  alt="상품이미지"/>
             <div class="info">
                 달걀
                 <span class="price">25000</span>
             </div>
         </product-item>
         <product-item>
-            <img src="/main/tmp/sam1.png" />
+            <img src="/main/tmp/sam1.png"  alt="상품이미지" />
             <div class="info">
                 달걀
                 <span class="price">25000</span>
             </div>
         </product-item>
         <product-item>
-            <img src="/main/tmp/sam1.png" />
+            <img src="/main/tmp/sam1.png" alt="상품이미지" />
             <div class="info">
                 달걀
                 <span class="price">25000</span>
