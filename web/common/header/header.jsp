@@ -13,7 +13,7 @@
         <script src="${pageContext.request.contextPath}/common/header/js/MenuItem.js"></script>
         <script src="${pageContext.request.contextPath}/common/header/js/Search.js"></script>
         <script src="${pageContext.request.contextPath}/common/header/js/BasketCount.js" type="module"></script>
-        <script src="${pageContext.request.contextPath}/common/header/js/Routes.js" type="text/javascript" ></script>
+        <script src="${pageContext.request.contextPath}/common/js/Routes.js" type="text/javascript" ></script>
     </head>
 </html>
 <header class="header">

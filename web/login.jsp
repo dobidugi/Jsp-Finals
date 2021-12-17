@@ -11,8 +11,6 @@
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
     <link href="${pageContext.request.contextPath}/common/inpt_button_type1.css" type="text/css" rel="stylesheet" >
     <script src="${pageContext.request.contextPath}/common/header/js/BasicForm.js"></script>
-    <script src="${pageContext.request.contextPath}/login/js/Routes.js" type="text/javascript"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Title</title>
     <style>
         .app {
