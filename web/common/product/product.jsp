@@ -1,4 +1,5 @@
-<%--
+<%@ page import="common.Product" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: dobidugi
   Date: 2021/12/16
@@ -6,12 +7,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
-    <script src="${pageContext.request.contextPath}/main/js/ProductList.js" type="module"></script>
-    <script src="${pageContext.request.contextPath}/main/js/ProductItem.js" type="module"></script>
+    <script src="${pageContext.request.contextPath}/Product/js/ProductList.js" type="module"></script>
+    <script src="${pageContext.request.contextPath}/Product/js/ProductItem.js" type="module"></script>
     <title>Title</title>
     <style>
         product-list {
@@ -21,12 +21,13 @@
             justify-content : center;
             align-items: center;
             min-height: 30em;
+            margin:auto auto;
         }
+
 
         product-item {
             display: flex;
             flex-direction : column;
-            width : 25%;
             height: auto;
             margin: 2em;
             border : solid 1px #DCDCDC;
@@ -34,7 +35,7 @@
         }
 
         product-item:hover {
-            border : solid 1px orange;
+            border-color: orange;
             border-radius : 5px 5px;
         }
 
@@ -45,35 +46,27 @@
 
 </head>
 <body>
+    <%
+        ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
+        int size = list.size();
+    %>
+<%--    <%= request.getAttribute("error")%>--%>
     <product-list>
-        <product-item product-id="1">
-            <img src="/main/tmp/sam1.png" />
-            <div class="info">
-                달걀
-                <span class="price">25000</span>
-            </div>
-        </product-item>
-        <product-item>
-            <img src="/main/tmp/sam1.png"  alt="상품이미지"/>
-            <div class="info">
-                달걀
-                <span class="price">25000</span>
-            </div>
-        </product-item>
-        <product-item>
-            <img src="/main/tmp/sam1.png"  alt="상품이미지" />
-            <div class="info">
-                달걀
-                <span class="price">25000</span>
-            </div>
-        </product-item>
-        <product-item>
-            <img src="/main/tmp/sam1.png" alt="상품이미지" />
-            <div class="info">
-                달걀
-                <span class="price">25000</span>
-            </div>
-        </product-item>
+        <%
+            for(Product product : list)
+            {
+        %>
+            <product-item product-id=<%= product.getId()%>>
+                <img src="/images/<%= product.getImage()%>.png"  alt="상품 이미지"/>
+                <div class="info">
+                    <span><%= product.getName()%></span>
+                    <span class="price"><%= product.getPrice()%></span>
+                </div>
+            </product-item>
+        <%
+            }
+        %>
+
     </product-list>
 </body>
 </html>

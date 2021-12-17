@@ -10,7 +10,7 @@
   <head>
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
     <script src="${pageContext.request.contextPath}/main/js/NoticeSlider.js" type="module"></script>
-    <script src="${pageContext.request.contextPath}/main/js/ProductList.js" type="module"></script>
+    <script src="${pageContext.request.contextPath}/Product/js/ProductList.js" type="module"></script>
 <%--    <script src="${pageContext.request.contextPath}/main/js/ProductItem.js" type="javascript"></script>--%>
     <title>$Title$</title>
     <style>
@@ -22,7 +22,7 @@
       }
 
       .app_sub {
-        width: 100%;
+        /*width: 100%;*/
       }
 
 
@@ -34,9 +34,7 @@
         margin-top: 1.5em;
       }
 
-      product-list {
-        width: 100%;
-      }
+
     </style>
   </head>
   <body>

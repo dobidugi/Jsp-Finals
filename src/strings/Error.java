@@ -23,4 +23,8 @@ public class Error {
         public final static String NEW_PASSWORD_NOT_MATCH = "새 비밀번호가 일치하지않습니다.";
     }
 
+    public static class Product {
+        public final static String EMPTY_PRODUCT_LIST = "상품을 찾을수 없습니다.";
+    }
+
 }

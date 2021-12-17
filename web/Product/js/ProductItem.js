@@ -58,6 +58,12 @@ class ProductItem extends HTMLElement{
                 background-color : #DC143C;
                 border : none;
             }
+            
+            img {
+                object-fit : cover;
+                width: 100%;
+                height: 20em;
+            }
         `
         this.append(style);
         this.append(this.createBtns(productId));
