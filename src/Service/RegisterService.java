@@ -29,7 +29,8 @@ public class RegisterService {
             return new Pair<>(false, Error.Regsiter.DUPLICATE_ID);
         }
         PreparedStatement pstmt = null;
-        String query = "INSERT INTO User (userid, name, password, phone, address) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO User (userid, name, password, phone, address, money) VALUES (?, ?, ?, ?, ?, 100000)";
+        //String query = "INSERT INTO User (userid, name, password, phone, address) VALUES (?, ?, ?, ?, ?)";
         try {
             System.out.println(user.getName());
             pstmt = conn.prepareStatement(query);
@@ -42,6 +43,7 @@ public class RegisterService {
             pstmt.executeUpdate();
             return new Pair<>(true, null);
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return new Pair<>(false, Error.DB_ERROR);
         } catch (Exception e) {
             System.out.println(e.toString());
