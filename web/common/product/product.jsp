@@ -15,16 +15,64 @@
     <title>Title</title>
     <style>
         product-list {
-            width: 100%;
+            display: flex;
+            flex-wrap : wrap;
+            flex-direction: row;
+            justify-content : center;
+            align-items: center;
+            min-height: 30em;
         }
+
+        product-item {
+            display: flex;
+            flex-direction : column;
+            width : 25%;
+            height: auto;
+            margin: 2em;
+            border : solid 1px #DCDCDC;
+            border-radius : 5px 5px;
+        }
+
+        product-item:hover {
+            border : solid 1px orange;
+            border-radius : 5px 5px;
+        }
+
+
+
 
     </style>
 
 </head>
 <body>
     <product-list>
+        <product-item product-id="1">
+            <img src="/main/tmp/sam1.png" />
+            <div class="info">
+                달걀
+                <span class="price">25000</span>
+            </div>
+        </product-item>
         <product-item>
-
+            <img src="/main/tmp/sam1.png" />
+            <div class="info">
+                달걀
+                <span class="price">25000</span>
+            </div>
+        </product-item>
+        <product-item>
+            <img src="/main/tmp/sam1.png" />
+            <div class="info">
+                달걀
+                <span class="price">25000</span>
+            </div>
+        </product-item>
+        <product-item>
+            <img src="/main/tmp/sam1.png" />
+            <div class="info">
+                달걀
+                <span class="price">25000</span>
+            </div>
         </product-item>
     </product-list>
 </body>

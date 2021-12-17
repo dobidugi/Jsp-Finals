@@ -1,38 +1,66 @@
 import UpdateBasketCount from "../../common/header/js/UpdateBasketCount.js";
 
-export default class ProductItem {
+class ProductItem extends HTMLElement{
     constructor(parent, product) {
-        this.product = product;
-        this.parent = parent;
-
-        // this.addEventListener('click', () => {
-        //     alert(product.id);
-        // })
+        super();
         this.render();
     }
 
     render(){
-        const item = document.createElement("div");
-        const img = document.createElement("img");
-        const info = document.createElement("div");
-        const title = document.createElement("span");
-        const price = document.createElement("span");
-
-        img.src = this.product.img;
-        item.className="product-item";
-        item.append(img);
-
-        info.className="info";
-        price.className="price";
-
-        title.textContent = this.product.title;
-        price.textContent = this.product.price + "원";
-
-        info.append(title);
-        info.append(price);
-        item.append(info);
-        item.append(this.createBtns(this.product.id));
-        this.parent.append(item);
+        const productId = this.getAttribute("product-id");
+        const style = document.createElement("style");
+        style.textContent =` 
+       
+            .info {
+                margin-top : 2em;
+                display :flex;
+                justify-content: center;
+                align-items : center;
+                flex-direction : column;
+            }
+            
+            .info > .price {
+                font-weight : bold;
+            }
+            
+            .info > .price::after {
+               content: "원";
+            }
+            
+            .btnContainer  {
+                width: 100%;
+                display : flex;
+                justify-content : center;
+                margin-top : 1em;
+                margin-bottom: 1em;
+            }
+            
+            .btnContainer > button {
+                border-radius : 5px 5px;
+                width : 10em;
+                height: 5em;
+                color : white;
+                margin-right: 1em;
+                margin-left: 1em;
+            }
+            
+             .btnContainer > button:hover {
+                box-shadow: 5px 3px 3px gray;
+            }
+    
+            .btnContainer > button:nth-child(1) {
+                background-color : #24A0ED;
+    
+                border : none;
+            }
+    
+            .btnContainer > button:nth-child(2) {
+                background-color : #DC143C;
+                border : none;
+            }
+        `
+        this.append(style);
+        this.append(this.createBtns(productId));
     }
 
     createBtns(productId) {
@@ -84,3 +112,5 @@ export default class ProductItem {
 
 
 }
+
+customElements.define("product-item", ProductItem);
