@@ -76,4 +76,40 @@ public class ProductService {
         else
             return list;
     }
+
+    public Product getProductInfo(int id) {
+        Product product = null;
+        PreparedStatement pstmt = null;
+        String query = "SELECT product_name, product_price,  product_img, product_delivery, product_count " +
+                "FROM Product WHERE product_id = ? AND product_delete= FALSE";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next())
+            {
+                product = new Product();
+                product.setName(rs.getString("product_name"));
+                product.setPrice(rs.getInt("product_price"));
+                product.setImage(rs.getString("product_img"));
+                product.setDelivery(rs.getInt("product_delivery"));
+                product.setCount(rs.getInt("product_count"));
+                return product;
+            }
+            else {
+                return null;
+            }
+//            while(rs.next()) {
+//                product = new Product();
+//                product.setName(rs.getString("product_name"));
+//                product.setPrice(rs.getInt("product_price"));
+//                product.setImage(rs.getString("product_img"));
+//                product.setDelivery(rs.getInt("product_delivery"));
+//                product.setCount(rs.getInt("product_count"));
+//            }
+
+        } catch (SQLException throwables) {
+            throw new ProductException(Error.DB_ERROR);
+        }
+    }
 }

@@ -78,4 +78,9 @@ public class Product {
         ProductService productService = new ProductService();
         return productService.getSearchProductList(value);
     }
+
+    public Product getProductInfo(int id) {
+        ProductService productService = new ProductService();
+        return productService.getProductInfo(id);
+    }
 }

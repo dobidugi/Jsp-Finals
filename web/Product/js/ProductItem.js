@@ -94,6 +94,7 @@ class ProductItem extends HTMLElement{
     }
 
     handleAddBasketBtnClick(productId) {
+        const idList = []; // cookie에 product id값을 저장하기위해 생성
         const list =
             window.localStorage.hasOwnProperty
         ("basketList")
@@ -111,8 +112,18 @@ class ProductItem extends HTMLElement{
         });
         if(!find)
             list.push({"id" : productId.toString(), count : "1"});
+
+        list.forEach(obj => {
+           idList.push(obj.id);
+        });
+
         window.localStorage.setItem("basketList", JSON.stringify(list));
         UpdateBasketCount();
+        this.saveCookie(idList);
+    }
+
+    saveCookie(idList){
+        document.cookie = "basket=" + idList + ";expires=0;path=/";
     }
 
 

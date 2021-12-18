@@ -1,4 +1,5 @@
-<%--
+<%@ page import="common.Product" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: dobidugi
   Date: 2021/12/02
@@ -49,18 +50,35 @@
             flex-direction:  row;
             text-align: center;
         }
+        .basket-box > .basket-list > .product-list {
+            display: flex;
+            flex-direction:  column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .basket-box > .basket-list > .product-list > ul{
+            display: flex;
+            flex-direction:  row;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            text-align: center;
+        }
 
         .bottom-line {
             border-bottom: solid 1px #DCDCDC;
         }
 
-        .basket-box > .basket-list > .title > li {
+        .basket-box > .basket-list > .title > li,
+        .basket-box > .basket-list > .product-list > ul > li {
             width: 20%;
             padding-top : 1em;
             padding-bottom: 1em;
 
         }
-        .basket-box > .basket-list > .title > li:nth-child(1) {
+        .basket-box > .basket-list > .title > li:nth-child(1),
+        .basket-box > .basket-list > .product-list > ul > li:nth-child(1) {
            width: 80%;
         }
 
@@ -114,13 +132,52 @@
             padding-top: 0.8em;
         }
 
-        .product-list {
-            min-height: 15em;
+
+       .product-list > ul > .info {
+           display: flex;
+           flex-direction: row;
+           justify-content: flex-start;
+           align-items: center;
+       }
+
+       .product-list > ul > .info > div {
+           margin-left: 1em;
+           display: flex;
+           flex-direction: column;
+           justify-content: flex-start;
+           align-items: flex-start;
+       }
+
+        .product-list > ul > .info > img {
+            object-fit: fill;
+            width: 8em;
+            height: 8em;
         }
+
+
+       .money::after {
+           content : "원";
+       }
+
+       .name::before {
+           content: "상품명 : ";
+       }
+       .totalCount::before {
+           content: "남은 수량 : ";
+       }
+
+
     </style>
 </head>
 <body>
 <div class="app">
+    <%
+        final String error = (String)request.getAttribute("error");
+        ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
+        int totalPrice = 0;
+        int totalDelivery = 0;
+    %>
+
     <%@ include file="common/header/header.jsp" %>
     <div class="app_sub">
         <div class="basket-box">
@@ -133,7 +190,38 @@
                 </ul>
 
                 <div class="product-list bottom-line">
+                   <% if(error != null) { %>
+                       <%= error%>
+                   <% } %>
 
+                   <%
+                       if(list != null) {
+                           for(Product product : list) {
+                               if( product != null) {
+                               %>
+                               <ul>
+                                   <li class="info">
+                                       <img src="images/<%= product.getImage()%>.png" alt="상품 이미지"/>
+                                       <div>
+                                           <span class="name"><%=product.getName()%></span>
+                                           <span class="totalCount"><%=product.getCount()%>개 남음</span>
+                                       </div>
+
+                                   </li>
+                                   <li class="money">
+                                       <%=product.getPrice()%>
+                                   </li>
+                                   <li class="money">
+                                       <%=product.getDelivery()%>
+                                   </li>
+                               </ul>
+                           <%
+                                   totalPrice += product.getPrice();
+                                   totalDelivery += product.getDelivery();
+                               }
+                           }
+                       }
+                   %>
                 </div>
 
                 <div class="guess bottom-line">
@@ -144,11 +232,11 @@
                         <ul class="price-list">
                             <li class="bottom-line">
                                 <span>총 상품금액</span>
-                                <span>0원</span>
+                                <span class="money"><%= totalPrice%></span>
                             </li>
                             <li class="bottom-line">
                                 <span>배송비</span>
-                                <span>0원</span>
+                                <span class="money"><%= totalDelivery%></span>
                             </li>
                         </ul>
                     </div>
@@ -156,7 +244,7 @@
 
                 <div class="total">
                     <span style="padding-left:0.3em">결제 예상금액</span>
-                    <span>0원</span>
+                    <span class="money"><%= (totalPrice + totalDelivery)%></span>
                 </div>
             </div>
 

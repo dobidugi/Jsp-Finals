@@ -25,6 +25,7 @@ public class Error {
 
     public static class Product {
         public final static String EMPTY_PRODUCT_LIST = "상품을 찾을수 없습니다.";
+        public final static String EMPTY_BASKET = "장바구니가 비어있습니다.";
     }
 
 }
