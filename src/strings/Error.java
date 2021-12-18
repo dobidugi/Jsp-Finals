@@ -28,4 +28,12 @@ public class Error {
         public final static String EMPTY_BASKET = "장바구니가 비어있습니다.";
     }
 
+    public static class Buy {
+        public final static String EMPTY_BASKET = "장바구니가 비어있습니다";
+        public final static String EMPTY_MONEY = "돈이 부족합니다.";
+        public final static String FAIL_USERMONEY_UPDATE= "유저정보 업데이트 실패";
+        public final static String FAIL_RECORD= "주문정보 기록 실패";
+
+    }
+
 }

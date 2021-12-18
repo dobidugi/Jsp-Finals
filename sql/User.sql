@@ -8,3 +8,7 @@ CREATE TABLE User
     address varchar(100) NOT NULL,
     money int(10) NOT NULL default 0
 )default character set utf8 collate utf8_general_ci;
+
+UPDATE User SET money=(money-(
+    SELECT product_price + product_delivery FROM Product
+    WHERE product_id=1)) WHERE id=1;

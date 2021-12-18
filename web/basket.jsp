@@ -34,6 +34,7 @@
             margin-top: 3em;
             width: 80%;
             height: auto;
+            margin-bottom: 4em;
         }
 
         .basket-box > span {
@@ -166,7 +167,24 @@
            content: "남은 수량 : ";
        }
 
+       .buy {
+           display: flex;
+           justify-content: flex-end;
+           margin-top : 0.3em;
 
+       }
+       .buy > button {
+           width: 15%;
+           height: 5em;
+           cursor: pointer;
+           justify-content: center;
+           align-items: center;
+           background: #ff5000;
+           color: white;
+           font-size: 1em;
+           border-radius: 5px 5px 5px 5px;
+           border: none;
+       }
     </style>
 </head>
 <body>
@@ -247,10 +265,24 @@
                     <span class="money"><%= (totalPrice + totalDelivery)%></span>
                 </div>
             </div>
-
-
+        <div class="buy">
+            <button class="buy">구매하기</button>
         </div>
+        </div>
+
     </div>
+    <script>
+        document.getElementsByClassName("buy")[0].addEventListener("click", () => {
+            <% if(session.getAttribute("is_login") != "true") { %>
+                alert("로그인이 필요한 서비스입니다.");
+                location.href="/login";
+            <% } else {
+                session.setAttribute("list", list);
+            %>
+                location.href="/buy";
+            <% } %>
+        });
+    </script>
 </div>
 </body>
 </html>

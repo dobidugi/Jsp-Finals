@@ -2,10 +2,12 @@ package common;
 
 import Service.AuthService;
 import Service.FindUserService;
+import Service.ProductService;
 import Service.RegisterService;
 
 import javafx.util.Pair;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 public class User {
@@ -16,14 +18,20 @@ public class User {
     private String phone;
     private String address;
 
+    private int user_pk;
 
-    public User(HttpServletRequest req) {
+    public User(HttpServletRequest req) { // 회원가입떄 사용
         this.id = req.getParameter("id");
         this.name = req.getParameter("name");
         this.password = req.getParameter("password");
         this.password2 = req.getParameter("password2");
         this.phone = req.getParameter("phone");
         this.address = req.getParameter("address");
+    }
+
+    public User(HttpSession session) { // 로그인후 상품을 구매할때사용
+        this.id = (String) session.getAttribute("userid");
+        this.user_pk =  Integer.parseInt((String) session.getAttribute("id"));
     }
     public String getPassword2() {
         return password2;
@@ -53,6 +61,9 @@ public class User {
         return address;
     }
 
+    public int getUser_pk() {
+        return user_pk;
+    }
 
     public Pair<Boolean, String> register() {
         RegisterService service = new RegisterService();
@@ -77,5 +88,10 @@ public class User {
     public boolean resetPassword() {
         FindUserService findUserService = new FindUserService();
         return findUserService.resetPassword(this);
+    }
+
+    public void buyProduct(int product_id) {
+        ProductService productService = new ProductService();
+        productService.buyProduct(product_id, this);
     }
 }

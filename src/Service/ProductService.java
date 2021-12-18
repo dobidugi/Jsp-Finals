@@ -2,6 +2,7 @@ package Service;
 
 import common.Db;
 import common.Product;
+import common.User;
 import exception.ProductException;
 import strings.Error;
 
@@ -80,7 +81,7 @@ public class ProductService {
     public Product getProductInfo(int id) {
         Product product = null;
         PreparedStatement pstmt = null;
-        String query = "SELECT product_name, product_price,  product_img, product_delivery, product_count " +
+        String query = "SELECT product_id, product_name, product_price,  product_img, product_delivery, product_count " +
                 "FROM Product WHERE product_id = ? AND product_delete= FALSE";
         try {
             pstmt = conn.prepareStatement(query);
@@ -89,6 +90,7 @@ public class ProductService {
             if(rs.next())
             {
                 product = new Product();
+                product.setId(rs.getInt("product_id"));
                 product.setName(rs.getString("product_name"));
                 product.setPrice(rs.getInt("product_price"));
                 product.setImage(rs.getString("product_img"));
@@ -111,5 +113,88 @@ public class ProductService {
         } catch (SQLException throwables) {
             throw new ProductException(Error.DB_ERROR);
         }
+    }
+
+    public void buyProduct(int product_id, User user) {
+        PreparedStatement pstmt = null;
+        int money  = 0;
+        String getUserMoneyQuery = "SELECT money FROM User WHERE id=? AND userid=?";
+        try {
+            pstmt = conn.prepareStatement(getUserMoneyQuery);
+            pstmt.setInt(1, user.getUser_pk());
+            pstmt.setString(2, user.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next())
+            {
+                money = rs.getInt("money");
+            }
+            else
+            {
+                throw new ProductException(Error.Buy.EMPTY_MONEY);
+
+            }
+        } catch (SQLException throwables) {
+
+            throw new ProductException(Error.DB_ERROR);
+
+        }
+
+        String productUpdateQuery = "UPDATE Product SET product_count=product_count - 1 " +
+                "WHERE product_id = ? AND product_count <> 0 AND product_delete=FALSE " +
+                "AND (product_price+product_delivery) <= ?";
+        System.out.println("유저 머니 : " +  money);
+        try {
+            pstmt = conn.prepareStatement(productUpdateQuery);
+            pstmt.setInt(1, product_id);
+            pstmt.setInt(2, money);
+            int r = pstmt.executeUpdate();
+            System.out.println("변경된 구문" + r);
+            if(r == 0)
+            {
+                throw new ProductException(Error.Buy.EMPTY_MONEY);
+
+            }
+
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
+            throw new ProductException(Error.DB_ERROR);
+        }
+
+        String decreaseUserMoneyQuery =
+                "UPDATE User SET money=(money-( " +
+                        "SELECT product_price + product_delivery FROM Product WHERE product_id=?)) " +
+                        "WHERE id=? AND userid=?" ;
+        try {
+            pstmt = conn.prepareStatement(decreaseUserMoneyQuery);
+            pstmt.setInt(1, product_id);
+            pstmt.setInt(2,user.getUser_pk());
+            pstmt.setString(3, user.getId());
+
+            int r = pstmt.executeUpdate();
+            if( r == 0)
+            {
+                throw new ProductException(Error.Buy.FAIL_USERMONEY_UPDATE);
+            }
+        } catch (SQLException throwables) {
+            throw new ProductException(Error.DB_ERROR);
+        }
+
+
+        String recordOrderQuery =
+                "INSERT INTO OrderList (user_id, product_id, order_time) VALUES (?, ? , now())";
+        try {
+            pstmt = conn.prepareStatement(recordOrderQuery);
+            pstmt.setInt(1,user.getUser_pk());
+            pstmt.setInt(2,product_id);
+            int r = pstmt.executeUpdate();
+            if(r == 0)
+            {
+                throw  new ProductException(Error.Buy.FAIL_RECORD);
+            }
+        } catch (SQLException throwables) {
+            throw new ProductException(Error.DB_ERROR);
+        }
+
+        System.out.println(user.getId()+ " 유저가 " + product_id + "를 구매");
     }
 }

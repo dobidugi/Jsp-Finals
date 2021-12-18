@@ -80,8 +80,8 @@ class ProductItem extends HTMLElement{
             this.handleBuyBtnClick(productId)
         });
         addBasketBtn.addEventListener("click", (e) => {
-            this.handleAddBasketBtnClick(productId) }
-        );
+            this.handleAddBasketBtnClick(productId);
+        });
 
         addBasketBtn.textContent = "장바구니";
         btns.append(buyBtn);
@@ -90,7 +90,7 @@ class ProductItem extends HTMLElement{
     }
 
     handleBuyBtnClick(productId) {
-        console.log(productId);
+        location.href=`/buy?value=${productId}`;
     }
 
     handleAddBasketBtnClick(productId) {
