@@ -1,6 +1,7 @@
 class Search extends HTMLElement {
     constructor() {
         super();
+        this.input;
     }
 
     render() {
@@ -20,6 +21,7 @@ class Search extends HTMLElement {
         btn.append(img);
         this.append(input);
         this.append(btn);
+        this.input = input;
     }
 
     connectedCallback() {
@@ -27,7 +29,8 @@ class Search extends HTMLElement {
     }
 
     searchEvent() {
-        alert("searchStart");
+        const value = this.input.value;
+        location.href=`/search?value=${value}`;
     }
 }
 

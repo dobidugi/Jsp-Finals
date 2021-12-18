@@ -20,30 +20,30 @@ public class ProductService {
         }
     }
 
+    private Product saveProductInfoForList(ResultSet rs) throws SQLException {
+        Product product = new Product();
+        product.setName(rs.getString("product_name"));
+        product.setId(rs.getInt("product_id"));
+        product.setPrice(rs.getInt("product_price"));
+        product.setDelivery(rs.getInt("product_delivery"));
+        product.setImage(rs.getString("product_img"));
+        return product;
+    }
+
     public ArrayList<Product> getProductList() {
         PreparedStatement pstmt = null;
         String query = "SELECT product_id, product_name, product_price,  product_img, product_delivery " +
-                "FROM PRODUCT WHERE product_delete=FALSE AND product_count <> 0";
+                "FROM Product WHERE product_delete=FALSE AND product_count <> 0";
         ArrayList<Product> list = new ArrayList<>();
         try {
             pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
-            System.out.println(rs.getRow());
-
             while(rs.next())
             {
-                Product product = new Product();
-                product.setName(rs.getString("product_name"));
-                product.setId(rs.getInt("product_id"));
-                product.setPrice(rs.getInt("product_price"));
-                product.setDelivery(rs.getInt("product_delivery"));
-                product.setImage(rs.getString("product_img"));
-                list.add(product);
+                list.add(saveProductInfoForList(rs));
             }
 
-
         } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
             throw new ProductException(Error.DB_ERROR);
         }
         if(list.size() == 0)
@@ -51,5 +51,29 @@ public class ProductService {
         else
             return list;
 
+    }
+
+    public ArrayList<Product> getSearchProductList(String value) {
+        ArrayList<Product> list = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        String nValue = "%" + value + "%";
+        String query = "SELECT product_id, product_name, product_price,  product_img, product_delivery " +
+                "FROM Product WHERE product_name like ? AND product_delete=FALSE AND product_count <> 0";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1,nValue);
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next())
+            {
+                list.add(saveProductInfoForList(rs));
+            }
+        } catch (SQLException throwables) {
+            throw new ProductException(Error.DB_ERROR);
+        }
+        if(list.size() == 0)
+            throw new ProductException(Error.Product.EMPTY_PRODUCT_LIST);
+        else
+            return list;
     }
 }

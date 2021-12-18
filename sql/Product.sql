@@ -27,3 +27,7 @@ VALUES ("팩우유", 15, 19400, 0, "pet_pad");
 INSERT INTO Product
 (product_name, product_count, product_price, product_delivery, product_img)
 VALUES ("샴푸", 4, 15000, 0, "shampoo");
+
+INSERT INTO Product
+(product_name, product_count, product_price, product_delivery, product_img)
+VALUES ("강아지 장난감", 100, 9000, 0, "dog_toy");

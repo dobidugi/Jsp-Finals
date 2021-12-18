@@ -1,5 +1,6 @@
 <%@ page import="common.Product" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%--
   Created by IntelliJ IDEA.
   User: dobidugi
   Date: 2021/12/16
@@ -39,6 +40,18 @@
             border-radius : 5px 5px;
         }
 
+        .error > span {
+            font-size: 3em;
+            color: #a9a9a9;
+        }
+
+        .error {
+            margin-top: 2em;
+            display:flex;
+            justify-content: center;
+
+        }
+
 
 
 
@@ -48,22 +61,31 @@
 <body>
     <%
         ArrayList<Product> list = (ArrayList<Product>) request.getAttribute("list");
-        int size = list.size();
+        String error  = (String)request.getAttribute("error");
     %>
 <%--    <%= request.getAttribute("error")%>--%>
+        <%if(error != null) {%>
+            <div class="error">
+                <span class="error"><%= error %> </span>
+            </div>
+
+        <%}%>
+
     <product-list>
         <%
-            for(Product product : list)
-            {
+            if(list != null) {
+                for(Product product : list)
+                {
         %>
-            <product-item product-id=<%= product.getId()%>>
-                <img src="/images/<%= product.getImage()%>.png"  alt="상품 이미지"/>
-                <div class="info">
-                    <span><%= product.getName()%></span>
-                    <span class="price"><%= product.getPrice()%></span>
-                </div>
-            </product-item>
+                <product-item product-id=<%= product.getId()%>>
+                    <img src="/images/<%= product.getImage()%>.png"  alt="상품 이미지"/>
+                    <div class="info">
+                        <span><%= product.getName()%></span>
+                        <span class="price"><%= product.getPrice()%></span>
+                    </div>
+                </product-item>
         <%
+                }
             }
         %>
 

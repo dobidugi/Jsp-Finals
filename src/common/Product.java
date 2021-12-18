@@ -73,4 +73,9 @@ public class Product {
         ProductService productService = new ProductService();
         return productService.getProductList();
     }
+
+    public ArrayList<Product> getSearchProductList(String value) {
+        ProductService productService = new ProductService();
+        return productService.getSearchProductList(value);
+    }
 }
