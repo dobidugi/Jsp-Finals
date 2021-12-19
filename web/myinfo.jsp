@@ -98,6 +98,7 @@
                 font-size: 0.9em;
                 border: none;
                 cursor: pointer;
+                margin-bottom: 2em;
             }
 
             .order-item {

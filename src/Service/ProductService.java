@@ -204,7 +204,7 @@ public class ProductService {
                 "select " +
                         "(select product_name from product where product_id = x.product_id) as name," +
                         "(select product_img from product where product_id = x.product_id) as img,  " +
-                        "order_time from orderlist x where user_id=?;";
+                        "order_time from orderlist x where user_id=? ORDER BY order_time DESC";
         try {
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, user_pk);
