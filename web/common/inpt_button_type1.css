@@ -1,8 +1,7 @@
 
 basic-form {
     width: 30em;
-    height: 30em;
-    overflow: hidden;
+    min-height: 30em;
     font-size: 1.3em;
     flex-direction: column;
     justify-content: space-around;

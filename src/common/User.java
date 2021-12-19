@@ -8,6 +8,7 @@ import Service.RegisterService;
 import javafx.util.Pair;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class User {
@@ -133,5 +134,10 @@ public class User {
     public void editInfo() {
         FindUserService findUserService = new FindUserService();
         findUserService.editUserInfo(this);
+    }
+
+    public ArrayList<OrderItem> getOrderList() {
+        ProductService productService = new ProductService();
+        return productService.getOrderList(this.getUser_pk());
     }
 }

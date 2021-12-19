@@ -1,4 +1,6 @@
-<%@ page import="common.User" %><%--
+<%@ page import="common.User" %>
+<%@ page import="common.OrderItem" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: dobidugi
   Date: 2021/11/29
@@ -20,12 +22,14 @@
                 height: 100vh;
             }
 
+            .app_sub {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
             basic-form {
                 display: flex;
-            }
-            basic-form > .form-item > label {
-                display: flex;
-
             }
 
             .inner_box {
@@ -96,6 +100,29 @@
                 cursor: pointer;
             }
 
+            .order-item {
+                display: flex;
+                flex-direction: row;
+                border-bottom: 1px solid #cecece;
+                border-left: 1px solid #cecece;
+                border-right : 1px solid #cecece;
+            }
+
+            .order-item > img {
+                object-fit: cover;
+                width: 5em;
+                height: 6em;
+
+            }
+
+            .order-item > .text {
+                margin-left: 0.3em;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
 
 
 
@@ -116,12 +143,13 @@
             User user = (User)request.getAttribute("user");
             String error = (String)request.getAttribute("error");
             String success = (String)request.getAttribute("success");
+            ArrayList<OrderItem> list = (ArrayList<OrderItem>)request.getAttribute("list");
         %>
         <%@ include file="common/header/header.jsp" %>
         <div class="app_sub">
             <basic-form>
-                <form method="POST" action="edit">
-                    <span>개인정보</span>
+                <form method="POST" action="edit" style="margin-top: 3em;>
+                    <span ">개인정보</span>
                     <div class="inner_box">
                         <div class="inner_item">
                             <div class="name">
@@ -193,7 +221,23 @@
                 <div>
                     <span>주문내역</span>
                     <div class="inner_box">
+                        <%
+                            if(list != null)
+                            {
+                                for(OrderItem item : list) {
 
+                        %>
+                        <div class="order-item">
+                            <img src="/images/<%=item.getImg()%>.png" alt="상품 이미지"/>
+                            <div class="text">
+                                <span>상품 이름 : <%=item.getName()%></span>
+                                <span>구매 일자 : <%=item.getDate()%> </span>
+                            </div>
+                        </div>
+
+                        <%      }
+                            }
+                        %>
                     </div>
                 </div>
 

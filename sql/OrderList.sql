@@ -9,3 +9,4 @@ CREATE TABLE `OrderList`
    FOREIGN KEY (user_id) REFERENCES User(id),
    FOREIGN KEY (product_id) REFERENCES  Product(product_id)
 )default character set utf8 collate utf8_general_ci;
+

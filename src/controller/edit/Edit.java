@@ -1,5 +1,6 @@
 package controller.edit;
 
+import common.OrderItem;
 import common.User;
 import common.UserValidator;
 import exception.FindUserException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet("/edit")
 public class Edit extends HttpServlet {
@@ -30,7 +32,9 @@ public class Edit extends HttpServlet {
         if(uv.isEditUser()) {
             try {
                 user.editInfo();
+                ArrayList<OrderItem> list = user.getOrderList();
                 req.setAttribute("user",user);
+                req.setAttribute("list", list);
                 req.setAttribute("success","수정 완료");
             } catch (Exception e) {
                 e.printStackTrace();

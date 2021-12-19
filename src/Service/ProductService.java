@@ -3,6 +3,7 @@ package Service;
 import common.Db;
 import common.Product;
 import common.User;
+import common.OrderItem;
 import exception.ProductException;
 import strings.Error;
 
@@ -194,7 +195,32 @@ public class ProductService {
         } catch (SQLException throwables) {
             throw new ProductException(Error.DB_ERROR);
         }
+    }
 
-        System.out.println(user.getId()+ " 유저가 " + product_id + "를 구매");
+    public ArrayList<OrderItem> getOrderList(int user_pk) {
+        PreparedStatement pstmt = null;
+        ArrayList<OrderItem> list = new ArrayList<>();
+        String query =
+                "select " +
+                        "(select product_name from product where product_id = x.product_id) as name," +
+                        "(select product_img from product where product_id = x.product_id) as img,  " +
+                        "order_time from orderlist x where user_id=?;";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, user_pk);
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                OrderItem item = new OrderItem();
+                item.setName(rs.getString("name"));
+                item.setImg(rs.getString("img"));
+                item.setDate(rs.getDate("order_time"));
+                list.add(item);
+            }
+
+        } catch (SQLException throwables) {
+            throw new ProductException(Error.DB_ERROR);
+        }
+        return list;
     }
 }
