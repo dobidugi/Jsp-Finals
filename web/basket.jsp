@@ -167,15 +167,16 @@
            content: "남은 수량 : ";
        }
 
-       .buy > .buy_form {
+       .buy {
            display: flex;
            justify-content: center;
            align-items: flex-end;
            flex-direction: column;
            margin-top : 0.3em;
 
+
        }
-       .buy >  .buy_form  > input[type="submit"] {
+       .buy > input {
            width: 15%;
            height: 5em;
            cursor: pointer;
@@ -268,11 +269,17 @@
                 </div>
             </div>
         <div class="buy">
-            <form class='buy_form' method="post" action="buy">
-                <span class="error"><%= error != null ? error :""%> </span>
-                <input type="submit" class="buy" value="구매하기" />
-            </form>
-
+            <%
+                if(error!=null) {
+            %>
+                <script>
+                    alert("<%= error%>");
+                    location.href="/basket";
+                </script>
+            <%    }
+            %>
+            <span class="error"><%= error != null ? error :""%> </span>
+            <input type="submit" class="buy" value="구매하기" />
         </div>
         </div>
 
