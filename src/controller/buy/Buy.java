@@ -65,7 +65,7 @@ public class Buy extends HttpServlet {
             }
             return;
         }
-        else if(referer.equals(url+"/search") || referer.equals(url+"/index")) {
+        else {
             // 단일 구매
             int product_id = Integer.parseInt(req.getParameter("value"));
             try {

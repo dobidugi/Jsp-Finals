@@ -30,6 +30,8 @@ public class FindUserService {
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getPhone());
+            System.out.println(user.getName());
+            System.out.println(user.getPhone());
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {

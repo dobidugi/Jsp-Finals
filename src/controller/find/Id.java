@@ -23,6 +23,7 @@ public class Id extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher failPage = req.getRequestDispatcher("findid.jsp");
         RequestDispatcher successPage = req.getRequestDispatcher("findid.jsp");
+        req.setCharacterEncoding("utf-8");
         User user = new User(req);
         UserValidator uv = new UserValidator(user);
 

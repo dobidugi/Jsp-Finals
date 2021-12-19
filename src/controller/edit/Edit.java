@@ -20,6 +20,7 @@ public class Edit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        req.setCharacterEncoding("utf-8");
         if(session.getAttribute("is_login") == null)
         {
             resp.sendRedirect("/login");

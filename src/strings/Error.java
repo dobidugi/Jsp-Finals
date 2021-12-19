@@ -1,9 +1,6 @@
 package strings;
 
-import java.sql.PreparedStatement;
-
 public class Error {
-
     public final static String DB_ERROR = "디비 에러";
     public static class Regsiter {
         public final static String EMPTY_FORM = "모두 입력해주세요";
