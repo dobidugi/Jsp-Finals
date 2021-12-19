@@ -140,4 +140,9 @@ public class User {
         ProductService productService = new ProductService();
         return productService.getOrderList(this.getUser_pk());
     }
+
+    public int getMoneyForServer() {
+        FindUserService findUserService = new FindUserService();
+        return findUserService.getMoney(this);
+    }
 }

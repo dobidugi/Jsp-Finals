@@ -31,6 +31,12 @@ public class Basket  extends HttpServlet {
         {
             Product product = new Product();
             ArrayList<Product> list = new ArrayList<>();
+            if(productIdList.size() == 0)
+            {
+                req.setAttribute("error", Error.Product.EMPTY_BASKET);
+                req.getRequestDispatcher("basket.jsp").forward(req, resp);
+                return;
+            }
             try {
                 for(int id : productIdList ) {
                     list.add(product.getProductInfo(id));
@@ -61,17 +67,19 @@ public class Basket  extends HttpServlet {
         ArrayList<Integer> list = new ArrayList<>();
         String basketValue = null;
         String[] cookies= value.split(";");
-
+        System.out.println(cookies);
         for(String cookie : cookies)
         {
-            if(cookie.substring(0,7).equals("basket=")) {
+            if(cookie.startsWith("basket=") || cookie.startsWith(" basket=")) {
                 String[] tmp = cookie.split("=");
-                basketValue = tmp[1];
+
+                basketValue = tmp[tmp.length-1];
                 break;
             }
         }
-
+        if(basketValue == null) return list;
         String[] productNums = basketValue.split(",");
+
         for(String num : productNums) {
             list.add(Integer.parseInt(num));
         }

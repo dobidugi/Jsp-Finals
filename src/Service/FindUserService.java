@@ -5,6 +5,7 @@ import common.User;
 import exception.FindUserException;
 import strings.Error;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 
 public class FindUserService {
@@ -126,5 +127,25 @@ public class FindUserService {
             System.out.println(throwables.getMessage());
             throw new FindUserException(Error.DB_ERROR);
         }
+    }
+
+    public int getMoney(User user) {
+        int money = 0;
+        PreparedStatement pstmt = null;
+        String query = "SELECT money FROM User WHERE id=?";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,user.getUser_pk());
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                money = rs.getInt("money");
+            }
+
+
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
+            throw new FindUserException(Error.DB_ERROR);
+        }
+        return money;
     }
 }

@@ -167,13 +167,15 @@
            content: "남은 수량 : ";
        }
 
-       .buy {
+       .buy > .buy_form {
            display: flex;
-           justify-content: flex-end;
+           justify-content: center;
+           align-items: flex-end;
+           flex-direction: column;
            margin-top : 0.3em;
 
        }
-       .buy > button {
+       .buy >  .buy_form  > input[type="submit"] {
            width: 15%;
            height: 5em;
            cursor: pointer;
@@ -266,7 +268,11 @@
                 </div>
             </div>
         <div class="buy">
-            <button class="buy">구매하기</button>
+            <form class='buy_form' method="post" action="buy">
+                <span class="error"><%= error != null ? error :""%> </span>
+                <input type="submit" class="buy" value="구매하기" />
+            </form>
+
         </div>
         </div>
 
@@ -278,6 +284,7 @@
                 location.href="/login";
             <% } else {
                 session.setAttribute("list", list);
+                session.setAttribute("totalMoney", (totalDelivery + totalPrice));
             %>
                 location.href="/buy";
             <% } %>

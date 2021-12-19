@@ -3,6 +3,7 @@ package controller.buy;
 import common.Product;
 import common.ServerInfo;
 import common.User;
+import exception.ProductException;
 import strings.Error;
 
 import javax.servlet.ServletException;
@@ -35,16 +36,32 @@ public class Buy extends HttpServlet {
             // 복수 구매
             if(buyList != null)
             {
-               for(Product product : buyList) {
-                   if(product != null) {
-                       user.buyProduct(product.getId());
-                   }
-               }
+
+                int totalMoney =  (int)session.getAttribute("totalMoney");
+                try {
+                    int userMoney = user.getMoneyForServer();
+                    if(userMoney < totalMoney) {
+                        req.setAttribute("list",buyList);
+                        throw new ProductException(Error.Buy.EMPTY_MONEY);
+                    } else {
+                        for(Product product : buyList) {
+                            if(product != null) {
+                                user.buyProduct(product.getId());
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    req.setAttribute("error", e.getMessage());
+                    req.getRequestDispatcher("basket.jsp").forward(req,resp);
+                    return;
+                }
+
             }
             else {
                 req.setAttribute("error", Error.Buy.EMPTY_BASKET);
-                req.getRequestDispatcher("result.jsp").forward(req,resp);
+                req.getRequestDispatcher("buy.jsp").forward(req,resp);
             }
+            return;
         }
         else if(referer.equals(url+"/search") || referer.equals(url+"/index")) {
             // 단일 구매
