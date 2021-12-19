@@ -43,28 +43,25 @@ public class Buy extends HttpServlet {
             }
             else {
                 req.setAttribute("error", Error.Buy.EMPTY_BASKET);
-                req.getRequestDispatcher("buy.jsp").forward(req,resp);
+                req.getRequestDispatcher("result.jsp").forward(req,resp);
             }
         }
-        else if(referer.equals(url+"/search") || referer.equals(url+"/index"))
-        {
+        else if(referer.equals(url+"/search") || referer.equals(url+"/index")) {
             // 단일 구매
             int product_id = Integer.parseInt(req.getParameter("value"));
-            try
-            {
+            try {
                 user.buyProduct(product_id);
-                req.setAttribute("good","true");
+                req.setAttribute("good", "true");
             } catch (Exception e) {
                 req.setAttribute("error", e.getMessage());
             }
         }
-
-        req.getRequestDispatcher("buy.jsp").forward(req,resp);
+        req.getRequestDispatcher("result.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.getRequestDispatcher("buy.jsp").forward(req,resp);
+        req.getRequestDispatcher("result.jsp").forward(req,resp);
     }
 }

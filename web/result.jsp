@@ -17,6 +17,25 @@
             width: 100%;
             height: 100vh;
         }
+
+        .result {
+            margin-top: 2em;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .result > span {
+            font-size: 3em;
+            color: #a9a9a9;
+        }
+
+        .result > a {
+            font-size: 1em;
+            margin-top : 1em;
+
+        }
     </style>
 
 </head>
@@ -28,16 +47,17 @@
     %>
     <%@ include file="common/header/header.jsp" %>
     <div class="app_sub">
-        <div>
+        <div class="result">
             <% if(good != null)
             {
             %>
             <span>구매 성공</span>
+            <a href="/myinfo">주문 내역</a>
             <%}%>
             <% if(error != null)
             {
             %>
-            <%= error%>
+            <span><%= error%></span>
             <%}%>
         </div>
     </div>

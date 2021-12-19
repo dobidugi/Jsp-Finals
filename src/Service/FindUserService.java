@@ -82,12 +82,31 @@ public class FindUserService {
             pstmt.setString(3, user.getName());
             pstmt.setString(4, user.getPhone());
             pstmt.executeUpdate();
-            System.out.println(pstmt.toString());
             return true;
         } catch (SQLException e) {
             throw new FindUserException(Error.DB_ERROR);
         } catch (Exception e) {
             throw new FindUserException(e.getMessage());
         }
+    }
+
+    public void getUserInfo(User user) {
+        PreparedStatement pstmt = null;
+        String query = "SELECT name, phone, address, money FROM User WHERE id=? AND userid = ?";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,user.getUser_pk());
+            pstmt.setString(2, user.getId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                user.setName(rs.getString("name"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setMoney(rs.getInt("money"));
+            }
+        } catch (SQLException throwables) {
+            throw new FindUserException(Error.DB_ERROR);
+        }
+
     }
 }

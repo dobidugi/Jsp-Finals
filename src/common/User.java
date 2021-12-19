@@ -19,6 +19,7 @@ public class User {
     private String address;
 
     private int user_pk;
+    private int money;
 
     public User(HttpServletRequest req) { // 회원가입떄 사용
         this.id = req.getParameter("id");
@@ -65,6 +66,26 @@ public class User {
         return user_pk;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Pair<Boolean, String> register() {
         RegisterService service = new RegisterService();
         return service.register(this); // 회원가입 시작
@@ -93,5 +114,10 @@ public class User {
     public void buyProduct(int product_id) {
         ProductService productService = new ProductService();
         productService.buyProduct(product_id, this);
+    }
+
+    public void getUserInfo() {
+        FindUserService findUserService = new FindUserService();
+        findUserService.getUserInfo(this);
     }
 }
