@@ -81,7 +81,12 @@ public class Basket  extends HttpServlet {
         String[] productNums = basketValue.split(",");
 
         for(String num : productNums) {
-            list.add(Integer.parseInt(num));
+            try {
+                list.add(Integer.parseInt(num));
+            } catch(Exception e) {
+                return null;
+            }
+
         }
         return list;
 

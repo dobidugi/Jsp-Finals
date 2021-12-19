@@ -53,7 +53,20 @@
             %>
             <span>구매 성공</span>
             <a href="/myinfo">주문 내역</a>
-            <%}%>
+
+            <%
+                if(good.equals("basket")) { // 장바구니목록을 구매했을때.
+            %>
+
+                <script>
+                    window.localStorage.clear();
+                    document.cookie = "basket=;expires=0;path=/";
+                </script>
+
+            <%    }
+            }
+
+            %>
             <% if(error != null)
             {
             %>

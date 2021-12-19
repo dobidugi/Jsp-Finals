@@ -10,8 +10,10 @@
 <html>
 <head>
     <script src="${pageContext.request.contextPath}/common/header/js/BasicForm.js"></script>
+    <script src="${pageContext.request.contextPath}/common/header/js/GetBasketCount.js"></script>
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
     <link href="${pageContext.request.contextPath}/common/inpt_button_type1.css" type="text/css" rel="stylesheet" >
+
     <style>
         .app {
             display : flex;
@@ -274,7 +276,9 @@
             %>
                 <script>
                     alert("<%= error%>");
-                    location.href="/basket";
+
+                    if(GetBasketCount() !== 0)
+                        location.href="/basket";
                 </script>
             <%    }
             %>
@@ -293,7 +297,8 @@
                 session.setAttribute("list", list);
                 session.setAttribute("totalMoney", (totalDelivery + totalPrice));
             %>
-                location.href="/buy";
+                if( GetBasketCount() !== 0)
+                    location.href="/buy";
             <% } %>
         });
     </script>

@@ -49,6 +49,8 @@ public class Buy extends HttpServlet {
                                 user.buyProduct(product.getId());
                             }
                         }
+                        req.setAttribute("good","basket");
+                        req.getRequestDispatcher("result.jsp").forward(req,resp);
                     }
                 } catch (Exception e) {
                     req.setAttribute("error", e.getMessage());
