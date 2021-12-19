@@ -11,6 +11,8 @@
 <head>
     <script src="${pageContext.request.contextPath}/common/header/js/BasicForm.js"></script>
     <script src="${pageContext.request.contextPath}/common/header/js/GetBasketCount.js"></script>
+    <script src="${pageContext.request.contextPath}/common/header/js/UpdateBasketCount.js" type="module" ></script>
+
     <link href="${pageContext.request.contextPath}/common/default.css" type="text/css" rel="stylesheet" >
     <link href="${pageContext.request.contextPath}/common/inpt_button_type1.css" type="text/css" rel="stylesheet" >
 
@@ -200,7 +202,42 @@
         int totalPrice = 0;
         int totalDelivery = 0;
     %>
+    <script>
 
+        function RemoveBasketItem(product_id) {
+            const idList = []; // cookie에 product id값을 저장하기위해 생성
+            const list =
+                window.localStorage.hasOwnProperty
+                ("basketList")
+                    ?
+                    JSON.parse(window.localStorage.getItem("basketList"))
+                    :
+                    [];
+
+            const f = list.filter((obj) => {
+                if(parseInt(obj.id) !== parseInt(product_id))
+                    return obj;
+            });
+            f.forEach(obj => {
+                idList.push(obj.id);
+            });
+            window.localStorage.setItem("basketList", JSON.stringify(f));
+            document.cookie = "basket=" + idList + ";expires=0;path=/";
+            console.log("Click");
+            const flist =
+                window.localStorage.hasOwnProperty
+                ("basketList")
+                    ?
+                    JSON.parse(window.localStorage.getItem("basketList"))
+                    :
+                    [];
+            const count = flist.length;
+            const ele = document.getElementById("basket-count");
+            ele.innerText = count.toString();
+            location.href="/basket";
+        }
+
+    </script>
     <%@ include file="common/header/header.jsp" %>
     <div class="app_sub">
         <div class="basket-box">
@@ -228,6 +265,7 @@
                                        <div>
                                            <span class="name"><%=product.getName()%></span>
                                            <span class="totalCount"><%=product.getCount()%>개 남음</span>
+                                           <button onClick=" RemoveBasketItem(<%= product.getId()%>)">X</button>
                                        </div>
 
                                    </li>
