@@ -124,6 +124,12 @@
                 align-items: flex-start;
             }
 
+            basic-form {
+                margin-bottom : 1em;
+                padding-bottom : 2em;
+            }
+
+
 
 
 
