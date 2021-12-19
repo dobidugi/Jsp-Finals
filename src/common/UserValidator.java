@@ -91,4 +91,23 @@ public class UserValidator {
 
     public boolean isValidResetPassword() { return ResetPasswordNullCheck() && ResetPasswordEmptyCheck(); }
 
+
+
+    public boolean EditUserNullCheck() {
+        return this.user.getUser_pk() != 0 &&
+                this.user.getId() != null &&
+                this.user.getPhone() != null &&
+                this.user.getAddress() != null;
+    }
+
+    public boolean EditUserEmptyCheck() {
+        return this.user.getUser_pk() != 0 &&
+                this.user.getId().length() != 0 &&
+                this.user.getPhone().length() != 0 &&
+                this.user.getAddress().length() != 0;
+
+    }
+
+
+    public boolean isEditUser() { return EditUserNullCheck() && EditUserEmptyCheck(); };
 }

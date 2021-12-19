@@ -36,4 +36,9 @@ public class Error {
 
     }
 
+    public static class Edit {
+        public final static String EDIT_ERROR = "수정중 오류";
+        public final static String EMPTY_FORM = "모두 입력해주세요";
+    }
+
 }

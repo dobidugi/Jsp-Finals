@@ -107,6 +107,24 @@ public class FindUserService {
         } catch (SQLException throwables) {
             throw new FindUserException(Error.DB_ERROR);
         }
+    }
 
+    public void editUserInfo(User user) {
+        PreparedStatement pstmt = null;
+        String query = "UPDATE User SET phone=?, address=? WHERE id=? AND userid=?";
+        try {
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1,user.getPhone());
+            pstmt.setString(2,user.getAddress());
+            pstmt.setInt(3,user.getUser_pk());
+            pstmt.setString(4,user.getId());
+            int r = pstmt.executeUpdate();
+            if( r == 0) {
+                throw new FindUserException(Error.Edit.EDIT_ERROR);
+            }
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
+            throw new FindUserException(Error.DB_ERROR);
+        }
     }
 }

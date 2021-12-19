@@ -34,6 +34,15 @@ public class User {
         this.id = (String) session.getAttribute("userid");
         this.user_pk =  Integer.parseInt((String) session.getAttribute("id"));
     }
+
+    public User(HttpServletRequest req, HttpSession session) { // 회원정보 수정할때 사용
+        this.id = (String) session.getAttribute("userid");
+        this.user_pk =  Integer.parseInt((String) session.getAttribute("id"));
+        this.name = req.getParameter("name");
+        this.phone = req.getParameter("phone");
+        this.address = req.getParameter("address");
+        this.money = Integer.parseInt(req.getParameter("money"));
+    }
     public String getPassword2() {
         return password2;
     }
@@ -119,5 +128,10 @@ public class User {
     public void getUserInfo() {
         FindUserService findUserService = new FindUserService();
         findUserService.getUserInfo(this);
+    }
+
+    public void editInfo() {
+        FindUserService findUserService = new FindUserService();
+        findUserService.editUserInfo(this);
     }
 }

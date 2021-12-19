@@ -79,7 +79,7 @@
                 color: #a0a0a0;
             }
 
-            .button {
+            .button, .result {
                 display: flex;
                 justify-content: flex-end;
                 align-items: center;
@@ -92,10 +92,10 @@
                 width: 7em;
                 height: 2.0em;
                 font-size: 0.9em;
-                border-radius: 5px 5px 5px 5px;
                 border: none;
                 cursor: pointer;
             }
+
 
 
 
@@ -114,7 +114,8 @@
     <div class="app">
         <%
             User user = (User)request.getAttribute("user");
-
+            String error = (String)request.getAttribute("error");
+            String success = (String)request.getAttribute("success");
         %>
         <%@ include file="common/header/header.jsp" %>
         <div class="app_sub">
@@ -128,7 +129,7 @@
                             </div>
                             <div class="value">
                                 <label>
-                                    <input type="text" value="<%= user.getId()%>" readonly="readonly" />
+                                    <input type="text" value="<%= user.getId() != null ? user.getId() : " "%>" readonly="readonly" />
                                 </label>
                             </div>
                         </div>
@@ -139,7 +140,7 @@
                             </div>
                             <div class="value">
                                 <label>
-                                    <input type="text" value="<%= user.getName()%>" readonly="readonly" />
+                                    <input type="text" value="<%= user.getName() != null ? user.getName() : ""%>" readonly="readonly" name="name"/>
                                 </label>
                             </div>
                         </div>
@@ -150,7 +151,7 @@
                             </div>
                             <div class="value">
                                 <label>
-                                    <input type="text" value="<%= user.getMoney()%>" readonly="readonly" />
+                                    <input type="text" value="<%= user.getMoney() != -1 ? user.getMoney() : "0" %>" name="money" readonly="readonly" />
                                 </label>
                             </div>
                         </div>
@@ -161,7 +162,7 @@
                             </div>
                             <div class="value">
                                 <label>
-                                    <input type="text" value="<%= user.getPhone()%>" name="phone" />
+                                    <input type="text" value="<%= user.getPhone() != null ? user.getPhone() : ""%>" name="phone" />
                                 </label>
                             </div>
                         </div>
@@ -172,12 +173,19 @@
                             </div>
                             <div class="value">
                                 <label>
-                                    <input type="text" value="<%= user.getAddress()%>"  />
+                                    <input type="text" value="<%= user.getAddress() != null ? user.getAddress() : ""%>"  name="address"/>
                                 </label>
                             </div>
                         </div>
                     </div>
+                    <div class="result">
+                        <sapn style=" color: red;font-size: 0.5em;">
+                            <%= error != null ? error : ""%>
+                            <%= success != null ? success : ""%>
+                        </sapn>
+                    </div>
                     <div class="button">
+
                         <button>개인정보 수정</button>
                     </div>
                 </form>
